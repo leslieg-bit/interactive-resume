@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leslie Gilliland for Executive Director, Mid City Redevelopment Alliance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals (Stone, Teal) -->
+    <!-- Application Structure Plan: A top-down narrative SPA. Starts with a summary aligning the candidate with the org's mission. The core is an interactive 'Competency Match' section where users click job requirements (Vision, Operations, etc.) to see relevant experience. This is followed by a visual career timeline, quantitative impact cards, and a skills chart. This structure directly maps the candidate's qualifications to the employer's needs in an engaging, user-driven way, rather than a passive list. -->
+    <!-- Visualization & Content Choices: 1. Competency Matcher: Goal: Organize/Compare. Method: Interactive Buttons + JS-updated text blocks. Justification: Directly answers "why are you a good fit?" for each key job requirement. 2. Career Timeline: Goal: Show Change/Progression. Method: HTML/CSS styled vertical timeline. Justification: More visually engaging than a list. 3. Impact Stats: Goal: Inform/Highlight. Method: HTML/CSS stat cards. Justification: Makes key numbers easily scannable. 4. Experience Chart: Goal: Compare. Method: Chart.js Bar Chart. Justification: Provides a quick visual summary of the candidate's years of experience in key functional areas relevant to the role. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F4; /* stone-100 */
+            color: #44403C; /* stone-700 */
+        }
+        .active-btn {
+            background-color: #0D9488 !important; /* teal-600 */
+            color: #ffffff !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .competency-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #0D9488;
+            border: 3px solid #F5F5F4;
+        }
+        .timeline-line {
+            position: absolute;
+            left: -21px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #A8A29E; /* stone-400 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-6xl">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-stone-800">Leslie Gilliland</h1>
+            <p class="text-xl md:text-2xl text-teal-700 mt-2">A Candidate for Executive Director</p>
+            <div class="mt-4 flex justify-center items-center space-x-4 text-stone-600">
+                <span>Baton Rouge, LA</span>
+                <span class="text-stone-300">|</span>
+                <span>(985) 502-7331</span>
+                <span class="text-stone-300">|</span>
+                <a href="mailto:lesliegilliland0@gmail.com" class="hover:text-teal-600">lesliegilliland0@gmail.com</a>
+            </div>
+        </header>
+
+        <main>
+            <section id="alignment" class="mb-16 bg-white p-8 rounded-xl shadow-sm">
+                <h2 class="text-3xl font-bold text-center mb-4 text-stone-800">Alignment with Mid City Redevelopment Alliance</h2>
+                <p class="text-center text-lg max-w-4xl mx-auto text-stone-600">
+                    This interactive summary highlights my qualifications for the Executive Director role. My career has been dedicated to community development, strategic leadership, and fostering growth—principles that are at the heart of the Mid City Redevelopment Alliance's mission. I am a passionate, community-minded leader with a proven record of building the diverse relationships and collaborative partnerships necessary to drive revitalization and create impactful, sustainable change.
+                </p>
+            </section>
+
+            <section id="competencies" class="mb-16">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-stone-800">Core Competency Match</h2>
+                    <p class="mt-2 text-lg text-stone-600">Click a key responsibility from the job description to see direct examples from my experience.</p>
+                </div>
+                <div id="competency-nav" class="flex flex-wrap justify-center gap-3 mb-8">
+                    <button onclick="showCompetency('vision')" class="competency-btn active-btn text-base font-medium bg-white shadow-sm hover:bg-teal-50 text-stone-700 rounded-full px-6 py-3">Vision, Mission, & Community</button>
+                    <button onclick="showCompetency('leadership')" class="competency-btn text-base font-medium bg-white shadow-sm hover:bg-teal-50 text-stone-700 rounded-full px-6 py-3">Team Leadership</button>
+                    <button onclick="showCompetency('operations')" class="competency-btn text-base font-medium bg-white shadow-sm hover:bg-teal-50 text-stone-700 rounded-full px-6 py-3">Operations & Fundraising</button>
+                    <button onclick="showCompetency('programs')" class="competency-btn text-base font-medium bg-white shadow-sm hover:bg-teal-50 text-stone-700 rounded-full px-6 py-3">Program Development</button>
+                </div>
+                <div id="competency-details" class="bg-white p-6 sm:p-8 rounded-xl shadow-sm min-h-[250px] transition-all duration-300">
+                </div>
+            </section>
+
+            <section id="impact" class="mb-16">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-stone-800">Quantifiable Impact & Skills</h2>
+                     <p class="mt-2 text-lg text-stone-600">A visual overview of key achievements and experience distribution.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-teal-500 text-white p-6 rounded-xl text-center flex flex-col justify-center shadow-md">
+                            <p class="text-4xl font-bold">$1.8M</p>
+                            <p class="mt-1 text-teal-100">Federal Grant Directed</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl text-center flex flex-col justify-center shadow-sm">
+                            <p class="text-4xl font-bold text-teal-600">10+</p>
+                            <p class="mt-1 text-stone-600">Years of Executive Leadership</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl text-center flex flex-col justify-center shadow-sm">
+                            <p class="text-4xl font-bold text-teal-600">20+</p>
+                            <p class="mt-1 text-stone-600">Years in Public Service & Education</p>
+                        </div>
+                        <div class="bg-teal-500 text-white p-6 rounded-xl text-center flex flex-col justify-center shadow-md">
+                            <p class="text-4xl font-bold">501c3</p>
+                            <p class="mt-1 text-teal-100">Nonprofit Leadership</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 sm:p-6 rounded-xl shadow-sm">
+                        <div class="chart-container">
+                            <canvas id="experienceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="experience" class="mb-16">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-stone-800">Professional Journey</h2>
+                    <p class="mt-2 text-lg text-stone-600">A timeline of my relevant roles and responsibilities.</p>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-line"></div>
+                    <div class="space-y-12">
+                        <div class="timeline-item relative">
+                            <h3 class="text-xl font-bold text-stone-800">President & CEO / Board Member</h3>
+                            <p class="text-md font-medium text-stone-600">Mid City Gras Inc. | 2018 - Present</p>
+                            <p class="mt-2 text-stone-600">Provide visionary leadership and operational oversight for a 501(c)(3) nonprofit. Act as primary spokesperson, lead large-scale fundraising, and build key community partnerships to advance the organization's mission within Mid City.</p>
+                        </div>
+                        <div class="timeline-item relative">
+                            <h3 class="text-xl font-bold text-stone-800">Executive Director of Communications</h3>
+                            <p class="text-md font-medium text-stone-600">Louisiana Department of Education | 2021 - 2024</p>
+                            <p class="mt-2 text-stone-600">Led communications teams with a focus on collaboration and excellence. Developed strategic communication plans, enhanced technological capacity through a major website redesign, and fostered a positive, inclusive work environment.</p>
+                        </div>
+                         <div class="timeline-item relative">
+                            <h3 class="text-xl font-bold text-stone-800">Director of Publications & Program Consultant</h3>
+                            <p class="text-md font-medium text-stone-600">Louisiana Department of Education | 2016 - 2021</p>
+                            <p class="mt-2 text-stone-600">Directed departmental operations, including budget and personnel management. Provided thought leadership in program development and managed key stakeholder communications and partnerships across the state.</p>
+                        </div>
+                        <div class="timeline-item relative">
+                            <h3 class="text-xl font-bold text-stone-800">Grant Director & Program Coordinator</h3>
+                            <p class="text-md font-medium text-stone-600">Mississippi Gulf Coast Community College | 2006 - 2010</p>
+                            <p class="mt-2 text-stone-600">Managed all activities for a $1.8 million federal grant, ensuring responsible fiscal management, budget compliance, and regular performance reporting to the Board of Trustees. Enhanced technological capabilities and cultivated national-level partnerships.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="education" class="text-center bg-white p-8 rounded-xl shadow-sm">
+                <h2 class="text-3xl font-bold mb-4 text-stone-800">Education</h2>
+                <div class="text-stone-600 text-lg space-y-1">
+                    <p><span class="font-semibold">Master of Arts, English</span> • Southeastern Louisiana University</p>
+                    <p><span class="font-semibold">Fellow, Southeastern Louisiana Writing Project</span> • Southeastern Louisiana University</p>
+                    <p><span class="font-semibold">Bachelor of Secondary Education, English</span> • University of New Orleans</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const competencyData = {
+            vision: `
+                <h3 class="text-2xl font-bold mb-4 text-teal-700">Vision, Mission, & Community</h3>
+                <ul class="list-disc pl-5 space-y-3 text-stone-600 text-lg">
+                    <li>Provide <span class="font-semibold">visionary leadership</span> to a 501(c)(3) Board of Directors, guiding efforts to achieve the organization's mission.</li>
+                    <li>Act as the organization’s <span class="font-semibold">primary spokesperson and representative</span> at speaking engagements, media interviews, and community events.</li>
+                    <li>Establish, nurture, and promote <span class="font-semibold">ongoing and new relationships and collaborations</span> with key leadership, volunteers, and community partners to strengthen impact in Mid City.</li>
+                    <li><span class="font-semibold">Elevate awareness</span> of the organization and its mission through strategic communications and public engagement.</li>
+                </ul>
+            `,
+            leadership: `
+                <h3 class="text-2xl font-bold mb-4 text-teal-700">Team Leadership</h3>
+                <ul class="list-disc pl-5 space-y-3 text-stone-600 text-lg">
+                    <li>Cultivate a <span class="font-semibold">culture of excellence, inclusion, and teamwork</span> in executive leadership roles.</li>
+                    <li>Foster a <span class="font-semibold">positive work environment</span> by encouraging staff and volunteers to contribute their unique perspectives and talents.</li>
+                    <li>Lead and supervise diverse teams, including graphic design, web content, and external customer service centers.</li>
+                    <li>Mentor and train new team members, developing and supporting school improvement plans and program goals.</li>
+                </ul>
+            `,
+            operations: `
+                <h3 class="text-2xl font-bold mb-4 text-teal-700">Operations & Fundraising</h3>
+                <ul class="list-disc pl-5 space-y-3 text-stone-600 text-lg">
+                    <li>Oversee all <span class="font-semibold">day-to-day operations</span> of a nonprofit organization, from programming and finances to building needs.</li>
+                    <li>Lead and execute <span class="font-semibold">large-scale fundraising efforts</span> to ensure organizational solvency and enable sustainable growth.</li>
+                    <li>Directed all activities for a <span class="font-semibold">$1.8 million federal grant</span>, overseeing responsible fiscal management, budget compliance, and payroll.</li>
+                    <li>Provide <span class="font-semibold">ongoing financial analysis</span> and regular monthly updates to leadership and Boards regarding operations, finances, and performance.</li>
+                    <li><span class="font-semibold">Enhance technological capacity</span> by leading a comprehensive website redesign and content migration initiative.</li>
+                </ul>
+            `,
+            programs: `
+                <h3 class="text-2xl font-bold mb-4 text-teal-700">Program Development & Support</h3>
+                <ul class="list-disc pl-5 space-y-3 text-stone-600 text-lg">
+                    <li>Provide <span class="font-semibold">thought leadership</span> to seek out and develop programmatic events, speakers, and experiences that align with the mission.</li>
+                    <li>Cultivate awareness of <span class="font-semibold">new program areas, stakeholder needs, and industry trends</span>, including building a key relationship with the National Academic Advising Association (NACADA).</li>
+                    <li>Plan, coordinate, and implement successful statewide programs, projects, and large events.</li>
+                    <li>Create, publish, and deliver professional development and resources in both traditional and virtual formats to support program goals.</li>
+                </ul>
+            `
+        };
+
+        const detailsContainer = document.getElementById('competency-details');
+        const navButtons = document.querySelectorAll('.competency-btn');
+
+        function showCompetency(key) {
+            detailsContainer.innerHTML = competencyData[key];
+            navButtons.forEach(button => {
+                button.classList.remove('active-btn');
+                if (button.getAttribute('onclick').includes(`'${key}'`)) {
+                    button.classList.add('active-btn');
+                }
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            showCompetency('vision');
+
+            const ctx = document.getElementById('experienceChart').getContext('2d');
+            const experienceChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Leadership', 'Communications', 'Fundraising & Grants', 'Program Development', 'Community Engagement'],
+                    datasets: [{
+                        label: 'Years of Direct Experience',
+                        data: [12, 8, 8, 15, 10],
+                        backgroundColor: '#0D9488',
+                        borderColor: '#0F766E',
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: {
+                                display: false,
+                            },
+                            ticks: {
+                                font: {
+                                    family: "'Inter', sans-serif"
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    size: 14,
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: '#44403C',
+                            titleFont: { size: 14, family: "'Inter', sans-serif" },
+                            bodyFont: { size: 12, family: "'Inter', sans-serif" },
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
