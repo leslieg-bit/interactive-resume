@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Leslie Gilliland for Executive Director, Mid City Redevelopment Alliance&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Chosen Palette: Warm Neutrals (Stone, Teal) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Application Structure Plan: A top-down narrative SPA. Starts with a summary aligning the candidate with the org's mission. The core is an interactive 'Competency Match' section where users click job requirements (Vision, Operations, etc.) to see relevant experience. This is followed by a visual career timeline, quantitative impact cards, and a skills chart. This structure directly maps the candidate's qualifications to the employer's needs in an engaging, user-driven way, rather than a passive list. --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Visualization &amp; Content Choices: 1. Competency Matcher: Goal: Organize/Compare. Method: Interactive Buttons + JS-updated text blocks. Justification: Directly answers "why are you a good fit?" for each key job requirement. 2. Career Timeline: Goal: Show Change/Progression. Method: HTML/CSS styled vertical timeline. Justification: More visually engaging than a list. 3. Impact Stats: Goal: Inform/Highlight. Method: HTML/CSS stat cards. Justification: Makes key numbers easily scannable. 4. Experience Chart: Goal: Compare. Method: Chart.js Bar Chart. Justification: Provides a quick visual summary of the candidate's years of experience in key functional areas relevant to the role. --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Inter', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #F5F5F4; /* stone-100 */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #44403C; /* stone-700 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.active-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #0D9488 !important; /* teal-600 */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #ffffff !important;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.competency-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.2s ease-in-out;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.timeline-item::before {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>content: '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: -30px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #0D9488;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 3px solid #F5F5F4;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.timeline-line {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: -21px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #A8A29E; /* stone-400 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chart-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 800px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-left: auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-right: auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 350px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-height: 400px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (min-width: 768px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.chart-container {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>height: 400px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="antialiased"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-6xl"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;header class="text-center mb-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-4xl md:text-5xl font-bold text-stone-800"&gt;Leslie Gilliland&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-xl md:text-2xl text-teal-700 mt-2"&gt;A Candidate for Executive Director&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mt-4 flex justify-center items-center space-x-4 text-stone-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;Baton Rouge, LA&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="text-stone-300"&gt;|&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;(985) 502-7331&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="text-stone-300"&gt;|&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="mailto:lesliegilliland0@gmail.com" class="hover:text-teal-600"&gt;lesliegilliland0@gmail.com&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;main&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="alignment" class="mb-16 bg-white p-8 rounded-xl shadow-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-3xl font-bold text-center mb-4 text-stone-800"&gt;Alignment with Mid City Redevelopment Alliance&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-center text-lg max-w-4xl mx-auto text-stone-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>This interactive summary highlights my qualifications for the Executive Director role. My career has been dedicated to community development, strategic leadership, and fostering growth—principles that are at the heart of the Mid City Redevelopment Alliance's mission. I am a passionate, community-minded leader with a proven record of building the diverse relationships and collaborative partnerships necessary to drive revitalization and create impactful, sustainable change.</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="competencies" class="mb-16"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="text-center mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2 class="text-3xl font-bold text-stone-800"&gt;Core Competency Match&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="mt-2 text-lg text-stone-600"&gt;Click a key responsibility from the job description to see direct examples from my experience.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="competency-nav" class="flex flex-wrap justify-center gap-3 mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button onclick="showCompetency('vision')" class="competency-btn active-btn text-base font-medium bg-white shadow-sm hover:bg-teal-50 text-stone-700 rounded-full px-6 py-3"&gt;Vision, Mission, &amp; Community&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button onclick="showCompetency('leadership')" class="competency-btn text-base font-medium bg-white shadow-sm hover:bg-teal-50 text-stone-700 rounded-full px-6 py-3"&gt;Team Leadership&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button onclick="showCompetency('operations')" class="competency-btn text-base font-medium bg-white shadow-sm hover:bg-teal-50 text-stone-700 rounded-full px-6 py-3"&gt;Operations &amp; Fundraising&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button onclick="showCompetency('programs')" class="competency-btn text-base font-medium bg-white shadow-sm hover:bg-teal-50 text-stone-700 rounded-full px-6 py-3"&gt;Program Development&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="competency-details" class="bg-white p-6 sm:p-8 rounded-xl shadow-sm min-h-[250px] transition-all duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="impact" class="mb-16"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="text-center mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2 class="text-3xl font-bold text-stone-800"&gt;Quantifiable Impact &amp; Skills&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>&lt;p class="mt-2 text-lg text-stone-600"&gt;A visual overview of key achievements and experience distribution.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="grid grid-cols-2 gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-teal-500 text-white p-6 rounded-xl text-center flex flex-col justify-center shadow-md"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-4xl font-bold"&gt;$1.8M&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="mt-1 text-teal-100"&gt;Federal Grant Directed&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-white p-6 rounded-xl text-center flex flex-col justify-center shadow-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-4xl font-bold text-teal-600"&gt;10+&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="mt-1 text-stone-600"&gt;Years of Executive Leadership&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-white p-6 rounded-xl text-center flex flex-col justify-center shadow-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-4xl font-bold text-teal-600"&gt;20+&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="mt-1 text-stone-600"&gt;Years in Public Service &amp; Education&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-teal-500 text-white p-6 rounded-xl text-center flex flex-col justify-center shadow-md"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-4xl font-bold"&gt;501c3&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="mt-1 text-teal-100"&gt;Nonprofit Leadership&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="bg-white p-4 sm:p-6 rounded-xl shadow-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="chart-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;canvas id="experienceChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="experience" class="mb-16"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>&lt;div class="text-center mb-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2 class="text-3xl font-bold text-stone-800"&gt;Professional Journey&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="mt-2 text-lg text-stone-600"&gt;A timeline of my relevant roles and responsibilities.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="relative pl-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="timeline-line"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="space-y-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="timeline-item relative"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-xl font-bold text-stone-800"&gt;President &amp; CEO / Board Member&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-md font-medium text-stone-600"&gt;Mid City Gras Inc. | 2018 - Present&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="mt-2 text-stone-600"&gt;Provide visionary leadership and operational oversight for a 501(c)(3) nonprofit. Act as primary spokesperson, lead large-scale fundraising, and build key community partnerships to advance the organization's mission within Mid City.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="timeline-item relative"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-xl font-bold text-stone-800"&gt;Executive Director of Communications&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-md font-medium text-stone-600"&gt;Louisiana Department of Education | 2021 - 2024&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="mt-2 text-stone-600"&gt;Led communications teams with a focus on collaboration and excellence. Developed strategic communication plans, enhanced technological capacity through a major website redesign, and fostered a positive, inclusive work environment.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>&lt;div class="timeline-item relative"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-xl font-bold text-stone-800"&gt;Director of Publications &amp; Program Consultant&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-md font-medium text-stone-600"&gt;Louisiana Department of Education | 2016 - 2021&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="mt-2 text-stone-600"&gt;Directed departmental operations, including budget and personnel management. Provided thought leadership in program development and managed key stakeholder communications and partnerships across the state.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="timeline-item relative"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-xl font-bold text-stone-800"&gt;Grant Director &amp; Program Coordinator&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-md font-medium text-stone-600"&gt;Mississippi Gulf Coast Community College | 2006 - 2010&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="mt-2 text-stone-600"&gt;Managed all activities for a $1.8 million federal grant, ensuring responsible fiscal management, budget compliance, and regular performance reporting to the Board of Trustees. Enhanced technological capabilities and cultivated national-level partnerships.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="education" class="text-center bg-white p-8 rounded-xl shadow-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-3xl font-bold mb-4 text-stone-800"&gt;Education&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="text-stone-600 text-lg space-y-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;&lt;span class="font-semibold"&gt;Master of Arts, English&lt;/span&gt; • Southeastern Louisiana University&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;&lt;span class="font-semibold"&gt;Fellow, Southeastern Louisiana Writing Project&lt;/span&gt; • Southeastern Louisiana University&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;&lt;span class="font-semibold"&gt;Bachelor of Secondary Education, English&lt;/span&gt; • University of New Orleans&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/main&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const competencyData = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>vision: `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-2xl font-bold mb-4 text-teal-700"&gt;Vision, Mission, &amp; Community&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;ul class="list-disc pl-5 space-y-3 text-stone-600 text-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Provide &lt;span class="font-semibold"&gt;visionary leadership&lt;/span&gt; to a 501(c)(3) Board of Directors, guiding efforts to achieve the organization's mission.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Act as the organization’s &lt;span class="font-semibold"&gt;primary spokesperson and representative&lt;/span&gt; at speaking engagements, media interviews, and community events.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Establish, nurture, and promote &lt;span class="font-semibold"&gt;ongoing and new relationships and collaborations&lt;/span&gt; with key leadership, volunteers, and community partners to strengthen impact in Mid City.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;&lt;span class="font-semibold"&gt;Elevate awareness&lt;/span&gt; of the organization and its mission through strategic communications and public engagement.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>leadership: `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-2xl font-bold mb-4 text-teal-700"&gt;Team Leadership&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;ul class="list-disc pl-5 space-y-3 text-stone-600 text-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Cultivate a &lt;span class="font-semibold"&gt;culture of excellence, inclusion, and teamwork&lt;/span&gt; in executive leadership roles.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Foster a &lt;span class="font-semibold"&gt;positive work environment&lt;/span&gt; by encouraging staff and volunteers to contribute their unique perspectives and talents.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Lead and supervise diverse teams, including graphic design, web content, and external customer service centers.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Mentor and train new team members, developing and supporting school improvement plans and program goals.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>operations: `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-2xl font-bold mb-4 text-teal-700"&gt;Operations &amp; Fundraising&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;ul class="list-disc pl-5 space-y-3 text-stone-600 text-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Oversee all &lt;span class="font-semibold"&gt;day-to-day operations&lt;/span&gt; of a nonprofit organization, from programming and finances to building needs.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Lead and execute &lt;span class="font-semibold"&gt;large-scale fundraising efforts&lt;/span&gt; to ensure organizational solvency and enable sustainable growth.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Directed all activities for a &lt;span class="font-semibold"&gt;$1.8 million federal grant&lt;/span&gt;, overseeing responsible fiscal management, budget compliance, and payroll.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Provide &lt;span class="font-semibold"&gt;ongoing financial analysis&lt;/span&gt; and regular monthly updates to leadership and Boards regarding operations, finances, and performance.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;&lt;span class="font-semibold"&gt;Enhance technological capacity&lt;/span&gt; by leading a comprehensive website redesign and content migration initiative.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>programs: `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-2xl font-bold mb-4 text-teal-700"&gt;Program Development &amp; Support&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;ul class="list-disc pl-5 space-y-3 text-stone-600 text-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Provide &lt;span class="font-semibold"&gt;thought leadership&lt;/span&gt; to seek out and develop programmatic events, speakers, and experiences that align with the mission.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Cultivate awareness of &lt;span class="font-semibold"&gt;new program areas, stakeholder needs, and industry trends&lt;/span&gt;, including building a key relationship with the National Academic Advising Association (NACADA).&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Plan, coordinate, and implement successful statewide programs, projects, and large events.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li&gt;Create, publish, and deliver professional development and resources in both traditional and virtual formats to support program goals.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const detailsContainer = document.getElementById('competency-details');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const navButtons = document.querySelectorAll('.competency-btn');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function showCompetency(key) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>detailsContainer.innerHTML = competencyData[key];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>navButtons.forEach(button =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>button.classList.remove('active-btn');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (button.getAttribute('onclick').includes(`'${key}'`)) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>button.classList.add('active-btn');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.addEventListener('DOMContentLoaded', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>showCompetency('vision');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const ctx = document.getElementById('experienceChart').getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const experienceChart = new Chart(ctx, {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>type: 'bar',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>labels: ['Leadership', 'Communications', 'Fundraising &amp; Grants', 'Program Development', 'Community Engagement'],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>datasets: [{</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>label: 'Years of Direct Experience',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>data: [12, 8, 8, 15, 10],</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>backgroundColor: '#0D9488',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>borderColor: '#0F766E',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>borderWidth: 1,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>borderRadius: 5,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>responsive: true,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>maintainAspectRatio: false,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>indexAxis: 'y',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>scales: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>x: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>beginAtZero: true,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>grid: {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>display: false,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>ticks: {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>font: {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>family: "'Inter', sans-serif"</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>y: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>grid: {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>display: false</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>ticks: {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>font: {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>family: "'Inter', sans-serif",</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>size: 14,</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>plugins: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>legend: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>display: false</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tooltip: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>enabled: true,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>backgroundColor: '#44403C',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>titleFont: { size: 14, family: "'Inter', sans-serif" },</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>bodyFont: { size: 12, family: "'Inter', sans-serif" },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
